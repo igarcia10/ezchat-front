@@ -1,0 +1,27 @@
+{
+  "name": "ezchat-react",
+  "version": "1.0.0",
+  "description": "EZChat front",
+  "main": "index.js",
+  "author": "igarcia10",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "yarn run clean & parcel build src/index.html",
+    "dev": "parcel src/index.html"
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "socket.io": "^2.2.0",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^4.1.19",
+    "parcel": "^1.12.3",
+    "typescript": "^3.6.3"
+  }
+}
