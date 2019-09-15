@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import socket from 'socket.io-client';
 
@@ -51,24 +51,36 @@ export const App: React.FC = () => {
         setMessage('');
     };
 
-    const handleChange = (message: string) => {
-        setMessage(message);
+    const handleKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.keyCode === 13) {
+            setMessage(message);
+        }
     };
 
-    client.emit('username', 'Iván');
+    useEffect(() => {
+        client.emit('username', 'Iván');
+    }, []);
+
+    client.on('system_message', (m: IMessage) => setMessages([...messages, m]));
     client.on('chat_message', (m: IMessage) => setMessages([...messages, m]));
+
+    useEffect(() => {
+        return () => {
+            client.emit('disconnect', 'Iván');
+        }
+    }, []);
 
     return (
         <div>
             <MessagesUl>
-                {messages.map(m => <li key={m.id}>{m.text}</li>)}
+                {messages.map(m => <div key={m.id} dangerouslySetInnerHTML={{ __html: m.text }} />)}
             </MessagesUl>
             <StyledForm>
-                <input type="text" value={message} onChange={e => handleChange(e.target.value)} onKeyPress={e => {
-                    if (e.keyCode === 13) {
-                        handleChange(message);
-                    }
-                }} /><button onClick={sendMessage}>Send</button>
+                <input type="text"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    onKeyPress={e => handleKeyPressed(e)} />
+                <button onClick={sendMessage}>Send</button>
             </StyledForm>
         </div>
     );
