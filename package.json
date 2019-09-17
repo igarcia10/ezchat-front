@@ -13,12 +13,14 @@
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^4.3.5",
     "@types/socket.io-client": "^1.4.32",
     "@types/styled-components": "^4.1.19",
     "parcel": "^1.12.3",
